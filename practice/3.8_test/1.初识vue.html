@@ -1,0 +1,39 @@
+<!--
+ * @Date: 2023-03-08 11:38:59
+ * @LastEditors: gongwy
+ * @LastEditTime: 2023-03-08 15:03:17
+ * @FilePath: /practice/3.8_test/初识vue.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 生产环境vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>hello, {{ name }}</h1>
+        <h1 v-on:click="showInfo">点击我</h1>
+    </div>
+    <script>
+        Vue.config.productionTip = false // 去掉生产提示
+        const vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    name: '张三'
+                } 
+            },
+            methods: {
+                showInfo() {
+                    alert(this.name)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!--
+ * @Date: 2023-03-09 09:04:48
+ * @LastEditors: gongwy
+ * @LastEditTime: 2023-03-09 09:20:17
+ * @FilePath: /practice/3.8_test/4.监听属性.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <span>今天天气很{{ weather }}</span>
+        <button @click="change">切换</button>
+    </div>
+    <script>
+        new Vue({
+            el: '#root',
+            data() {
+                return {
+                    isHot: false,
+                }
+            },
+            computed: {
+                weather() {
+                    return  this.isHot ? '炎热' : '凉爽'
+                }
+            },
+            methods: {
+                change() {
+                    this.isHot = !this.isHot
+                }
+            }
+        })
+    </script>
+</body>
+</html>

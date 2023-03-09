@@ -1,0 +1,107 @@
+<!--
+ * @Date: 2023-03-09 11:15:24
+ * @LastEditors: gongwy
+ * @LastEditTime: 2023-03-09 17:09:20
+ * @FilePath: /practice/3.8_test/5.列表过滤.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <input type="text" v-model="inputVal" />
+      <button @click="sort('1')">升</button>
+      <button @click="sort('0')">降</button>
+      <button @click="sort()">原</button>
+      <ul>
+        <li v-for="(item, index) in filterList" :key="item.id">
+          {{ item.name }} - {{ item.age }}
+        </li>
+      </ul>
+    </div>
+    <script>
+      new Vue({
+        el: "#root",
+        data() {
+          return {
+            list: [
+              {
+                id: "1",
+                name: "马冬梅",
+                age: "10",
+              },
+              {
+                id: "2",
+                name: "周冬雨",
+                age: "12",
+              },
+              {
+                id: "3",
+                name: "夏雨",
+                age: "1",
+              },
+            ],
+            inputVal: "",
+            initList: [],
+            sortType: "",
+          };
+        },
+        // mounted() {
+        //   this.initList = JSON.parse(JSON.stringify(this.list)); // 保存一份原来的数据
+        // },
+        computed: {
+          filterList() {
+            let arr = this.list.filter((item, index) => {
+              return item.name.includes(this.inputVal); // 所有字符串都包含空串，不用单独处理
+            });
+            // 不使用set方法 因为使用set方法必须修改原list
+            if (this.sortType) {
+              // 判断是否需要排序
+              arr = arr.sort((a, b) => {
+                return this.sortType === "0" ? b.age - a.age : "1"; // 使用三元表达式简化代码
+              });
+            }
+            return arr;
+          },
+          //   filterList: {
+          //     get() {
+          //       return this.list.filter((item, index) => {
+          //         return item.name.includes(this.inputVal); // 所有字符串都包含空串，不用单独处理
+          //       });
+          //     },
+          //     set(value) {
+          //       this.list = value; // 不能直接赋值给filterList 否则会堆栈溢出，只能直接赋给导致filterList变化的值list，这样就无法恢复到原数组，只能在初始化是复制一个数据，性能不好
+          //     },
+          //   },
+        },
+        methods: {
+          sort(type) {
+            this.sortType = type;
+            // sort方法会修改原数组
+            // switch (type) {
+            //   case "0":
+            //     this.filterList = this.list.sort((a, b) => {
+            //       return b.age - a.age;
+            //     });
+            //     break;
+            //   case "1":
+            //     this.filterList = this.list.sort((a, b) => {
+            //       return a.age - b.age;
+            //     });
+            //     break;
+            //   default:
+            //     this.filterList = this.initList;
+            //     break;
+            // }
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

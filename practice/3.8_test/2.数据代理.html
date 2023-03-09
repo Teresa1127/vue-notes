@@ -1,0 +1,31 @@
+<!--
+ * @Date: 2023-03-08 14:23:20
+ * @LastEditors: gongwy
+ * @LastEditTime: 2023-03-08 14:31:19
+ * @FilePath: /practice/3.8_test/数据代理.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let obj = {
+            x: 1
+        }
+        let obj2 = {} // 需要代理的对象是obj2，通过操作obj的x属性，使得obj2的x变化
+        Object.defineProperty(obj2, 'x', {
+            get() {
+                return obj.x
+            },
+            set(value) {
+                obj1.x = value
+            }
+        })
+    </script>
+</body>
+</html>
